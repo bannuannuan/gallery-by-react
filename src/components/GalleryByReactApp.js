@@ -58,7 +58,7 @@ var ImgFigure = React.createClass({
         }
         if (this.props.arrange.rotate){
             //考虑到兼容性 自带一个厂商前缀的数组并遍历 同时绑定this，使得在函数内可以使用this调用属性
-            ['-moz-', '-ms-', '-webkit', '-o-', ''].forEach(function (value) {
+            ['-moz-', '-ms-', '-webkit-', '-o-', ''].forEach(function (value) {
                 styleObj[value + 'transform'] = 'rotate(' + this.props.arrange.rotate + 'deg)';
             }.bind(this));
         }
@@ -81,6 +81,35 @@ var ImgFigure = React.createClass({
     }
 });
 
+//控制组件
+var ControllerUnit = React.createClass({
+    handleClick: function () {
+        //如果点击的是正处于中心的图片，翻转图片，否则居中
+        if (this.props.arrange.isCenter){
+            this.props.inverse();
+        }else {
+            this.props.center();
+        }
+        e.preventDefault();
+        e.stopPropagation();
+    },
+    render: function () {
+        var controllerUnitClassName = 'controller-unit';
+
+        //如果对应的是居中的图片，显示按钮的居中状态
+        if (this.props.arrange.isCenter){
+            controllerUnitClassName += ' is-center';
+
+            //如果同时对应翻转状态 显示翻转状态
+            if (this.props.arrange.isInverse){
+                controllerUnitClassName += ' is-inverse';
+            }
+        }
+        return (
+            <span className={controllerUnitClassName} onClick={this.handleClick}></span>
+        );
+    }
+});
 //GalleryByReactApp作为管理函数，管理整个舞台模块
 var GalleryByReactApp = React.createClass({
     Constant: {  //常量
@@ -271,7 +300,8 @@ var GalleryByReactApp = React.createClass({
                   isCenter: false
               };
           }
-         imgFigures.push(<ImgFigure data={imageDatas[i]} ref={'imageFigure' + i} arrange={this.state.imgArrangeArr[i]} inverse={this.inverse(i)} center={this.center(i)} />);
+         imgFigures.push(<ImgFigure key={i} data={imageDatas[i]} ref={'imageFigure' + i} arrange={this.state.imgArrangeArr[i]} inverse={this.inverse(i)} center={this.center(i)} />);
+          controllerUnits.push(<ControllerUnit key={i} arrange={this.state.imgArrangeArr[i]} inverse={this.inverse(i)} center={this.center(i)} />);
       }
       return (
         <section className="stage" ref="stage">

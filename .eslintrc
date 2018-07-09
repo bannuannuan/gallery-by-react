@@ -17,5 +17,6 @@
     "global-strict": false,
     "no-extra-semi": 1,
     "no-underscore-dangle": false
+      /*"no-debugger": false*/
   }
 }

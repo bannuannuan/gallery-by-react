@@ -47,15 +47,15 @@ module.exports = {
       loader: 'react-hot!babel-loader'
     }, {
       test: /\.scss/,
-      loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}!sass-loader?outputStyle=expanded'
+      loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version", "firefox 15"]}!sass-loader?outputStyle=expanded'
     }, {
       test: /\.css$/,
-      loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}'
+      loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version", "firefox 15"]}'
     }, {
         test:/\.json$/,
         loader:'json-loader'
     },{
-      test: /\.(png|jpg|woff|woff2)$/,
+      test: /\.(png|jpg|woff|woff2|svg|eot|ttf)$/,
       loader: 'url-loader?limit=8192'
     }]
   },

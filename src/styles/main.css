@@ -1,3 +1,6 @@
+@font-face {
+  font-family: "icons-turn-arrow";
+  src: url("../font/icons/turn-arrow.png"); }
 html, body {
   width: 100%;
   height: 100%;
@@ -21,7 +24,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   background-color: #ddd;
-  perspective: 180px; }
+  perspective: 1000px; }
   .img-figure {
     position: absolute;
     width: 120px;
@@ -32,10 +35,13 @@ html, body {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     background-color: #ffffff;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
     transform-style: preserve-3d;
     transform-origin: 0 50% 0;
     cursor: pointer;
-    transition: left .6s ease-in-out, top .6s ease-in-out; }
+    transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out; }
     .img-figure.is-inverse {
       transform: translate(120px) rotateY(180deg); }
 
@@ -77,6 +83,35 @@ html, body {
   z-index: 101;
   width: 100%;
   text-align: center; }
+  .controller-unit {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #aaa;
+    border-radius: 50%;
+    transform: scale(0.5);
+    transition: transform .6s ease-in-out, background-color .3s; }
+    .controller-unit.is-center {
+      background-color: #888;
+      transform: scale(1); }
+      .controller-unit.is-center::after {
+        font-family: "icons-turn-arrow";
+        font-size: 80%;
+        color: #fff;
+        content: "\e600";
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased; }
+      .controller-unit.is-center.is-inverse {
+        background-color: #555;
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        transform: rotateY(180deg); }
 
 /* controller -- end */
 
